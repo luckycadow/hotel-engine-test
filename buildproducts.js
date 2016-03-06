@@ -6,6 +6,7 @@ request(apiUrl, (err, res, body) => {
     const products = JSON.parse(body).items.map((fullProduct) => {
         // Include only the properties we need and cast the rating to a number
         return {
+            id: fullProduct.itemId,
             name: fullProduct.name,
             price: fullProduct.salePrice,
             shortDescription: fullProduct.shortDescription,
