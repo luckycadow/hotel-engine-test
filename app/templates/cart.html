@@ -30,10 +30,7 @@
         </tr>
         <tr>
             <td>Shipping:</td>
-            <td class="text-right">
-                <span ng-show="vm.shipping">{{vm.shipping | currency}}</span>
-                <span ng-hide="vm.shipping">-</span>
-            </td>
+            <td class="text-right">{{vm.getShipping() | currency}}</td>
         </tr>
         <tr>
             <td>Total:</td>
@@ -43,7 +40,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <button type="button" class="btn btn-block btn-sm btn-primary">Calculate Shipping</button>
+            <button type="button" class="btn btn-block btn-sm btn-primary" ng-click="vm.calculateShipping()">Calculate Shipping</button>
         </div>
     </div>
 </div>

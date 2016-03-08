@@ -19,11 +19,13 @@
     }
 
     /* @ngInject */
-    function CartController(cartService) {
+    function CartController(cartService, $uibModal) {
         this.getItems = getItems;
         this.remove = remove;
         this.getSubtotal = getSubtotal;
         this.getTotal = getTotal;
+        this.getShipping = getShipping;
+        this.calculateShipping = calculateShipping;
 
         function remove(product) {
             cartService.remove(product);
@@ -37,8 +39,24 @@
             return cartService.getTotal();
         }
 
+        function getShipping() {
+            return cartService.shipping;
+        }
+
         function getItems() {
             return cartService.items;
+        }
+
+        function calculateShipping() {
+            $uibModal.open({
+                templateUrl: '/app/templates/shipping-modal.html',
+                controller: 'ShippingModalController',
+                bindToController: true,
+                controllerAs: 'vm',
+                size: 'md'
+            }).result.then(function(shipping) {
+                cartService.shipping = shipping;
+            });
         }
     }
 
