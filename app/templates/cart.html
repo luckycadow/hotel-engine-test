@@ -1,51 +1,54 @@
-<h3>Shopping Cart</h3>
-<div ng-show="vm.getItems().length">
-    <table class="table table-striped">
-        <tr ng-repeat="item in vm.getItems()">
-            <td>
-                <img ng-src="{{item.thumbnailImage}}" class="img-responsive">
-            </td>
-            <td>
-                <div class="row">
-                    <div class="col-xs-12">
-                        {{item.name}}
+<div class="cart">
+    <h3>Shopping Cart</h3>
+    <div ng-show="vm.getItems().length">
+        <table class="table table-striped">
+            <tr ng-repeat="item in vm.getItems()">
+                <td>
+                    <img ng-src="{{item.thumbnailImage}}" class="img-responsive">
+                </td>
+                <td>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{item.name}}
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                        Quantity: {{item.quantity}}
+                    <div class="row">
+                        <div class="col-xs-7">
+                            <small class="text-muted">quantity: {{item.quantity}}</small>
+                        </div>
+                        <div class="col-xs-5">
+                            <small><a href="" class="text-danger" ng-click="vm.remove(item)">remove</a></small>
+                        </div>
                     </div>
-                    <div class="col-xs-4">
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="vm.remove(item)">&times;</button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
 
-    <table class="table table-border">
-        <tr>
-            <td>Sub Total:</td>
-            <td class="text-right">{{vm.getSubtotal() | currency}}</td>
-        </tr>
-        <tr>
-            <td>Shipping:</td>
-            <td class="text-right">{{vm.getShipping() | currency}}</td>
-        </tr>
-        <tr>
-            <td>Total:</td>
-            <td class="text-right">{{vm.getTotal() | currency}}</td>
-        </tr>
-    </table>
+        <table class="table table-border">
+            <tr>
+                <td>Sub Total:</td>
+                <td class="text-right">{{vm.getSubtotal() | currency}}</td>
+            </tr>
+            <tr>
+                <td>Shipping:</td>
+                <td class="text-right">{{vm.getShipping() | currency}}</td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td class="text-right">{{vm.getTotal() | currency}}</td>
+            </tr>
+        </table>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <button type="button" class="btn btn-block btn-sm btn-primary" ng-click="vm.calculateShipping()">Calculate Shipping</button>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-block btn-sm btn-primary" ng-click="vm.calculateShipping()">Calculate Shipping</button>
+            </div>
         </div>
     </div>
-</div>
-<div class="row" ng-show="!vm.getItems().length">
-    <div class="col-xs-12 text-center">
-        There are no items in your cart :(
+
+    <div class="row" ng-show="!vm.getItems().length">
+        <div class="col-xs-12 text-center">
+            There are no items in your cart :(
+        </div>
     </div>
 </div>

@@ -1,0 +1,43 @@
+---
+---
+
+.product-card {
+
+  .product-name {
+    height: 3em;
+  }
+
+  .product-price {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  .product-rating {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #e78f08;
+    cursor: pointer;
+
+    > *:focus {
+      outline: 0;
+    }
+  }
+
+  .add-to-cart {
+    margin: auto;
+    max-width: 16rem;
+    padding-top: 10px;
+  }
+}
+
+.cart {
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.shipping-modal {
+  tr {
+    cursor: pointer;
+  }
+}

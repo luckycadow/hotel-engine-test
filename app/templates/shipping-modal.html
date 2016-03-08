@@ -1,16 +1,9 @@
-<div class="modal-content">
+<div class="modal-content shipping-modal">
     <div class="modal-header">
         <button type="button" class="close" ng-click="vm.$dismiss()">&times;</button>
         <h4 class="modal-title">Shipping Options</h4>
     </div>
     <div class="modal-body">
-        <label ng-repeat="shipOption in vm.shippingOptions" for="shipoption-{{$index}}">
-            <div class="row">
-                <div class="col-xs-1">
-
-                </div>
-            </div>
-        </label>
         <table class="table">
             <tr ng-repeat="shipOption in vm.shippingOptions" ng-click="vm.selectedOption = shipOption">
                 <td><input type="radio" ng-value="shipOption" ng-model="vm.selectedOption"></td>

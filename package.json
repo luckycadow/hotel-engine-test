@@ -16,6 +16,6 @@
   "scripts": {
     "prestart": "npm install",
     "start": "gulp build && lite-server",
-    "dev": "concurrently \"gulp watch\" \"lite-server\""
+    "dev": "concurrently \"gulp watch\" \"jekyll serve\""
   }
 }
