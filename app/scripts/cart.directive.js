@@ -10,7 +10,7 @@
         var directive = {
             bindToController: true,
             controller: CartController,
-            templateUrl: '/app/templates/cart.html',
+            templateUrl: 'app/templates/cart.html',
             controllerAs: 'vm',
             restrict: 'E',
             scope: {}
@@ -49,7 +49,7 @@
 
         function calculateShipping() {
             $uibModal.open({
-                templateUrl: '/app/templates/shipping-modal.html',
+                templateUrl: 'app/templates/shipping-modal.html',
                 controller: 'ShippingModalController',
                 bindToController: true,
                 controllerAs: 'vm',

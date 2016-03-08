@@ -10,7 +10,7 @@
         var directive = {
             bindToController: true,
             controller: ProductListController,
-            templateUrl: '/app/templates/product-list.html',
+            templateUrl: 'app/templates/product-list.html',
             controllerAs: 'vm',
             restrict: 'E',
             scope: {}
