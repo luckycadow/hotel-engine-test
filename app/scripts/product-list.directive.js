@@ -19,14 +19,14 @@
     }
 
     /* @ngInject */
-    function ProductListController(productService) {
+    function ProductListController(productService, cartService) {
         var vm = this;
 
-        vm.viewDetails = viewDetails;
+        vm.addToCart = addToCart;
         vm.products = productService.get();
 
-        function viewDetails(product) {
-
+        function addToCart(product, quantity) {
+            cartService.add(product, quantity);
         }
     }
 
