@@ -6,10 +6,17 @@
         .controller('ShippingModalController', ShippingModalController);
 
     /* @ngInject */
-    function ShippingModalController(shippingOptions) {
+    function ShippingModalController(shippingOptions, selectedShipOption) {
+        var vm = this;
 
-        this.shippingOptions = shippingOptions;
+        vm.shippingOptions = shippingOptions;
+        vm.selectedOption = selectedShipOption;
 
+        vm.confirm = confirm;
+
+        function confirm() {
+            vm.$close(vm.selectedOption);
+        }
     }
 
 })();

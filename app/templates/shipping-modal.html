@@ -4,15 +4,23 @@
         <h4 class="modal-title">Shipping Options</h4>
     </div>
     <div class="modal-body">
+        <label ng-repeat="shipOption in vm.shippingOptions" for="shipoption-{{$index}}">
+            <div class="row">
+                <div class="col-xs-1">
+
+                </div>
+            </div>
+        </label>
         <table class="table">
-            <tr ng-repeat="shipOption in vm.shippingOptions">
+            <tr ng-repeat="shipOption in vm.shippingOptions" ng-click="vm.selectedOption = shipOption">
+                <td><input type="radio" ng-value="shipOption" ng-model="vm.selectedOption"></td>
                 <td>{{shipOption.name}}</td>
-                <td>{{shipOption.cost | currency}}</td>
-                <td class="text-right"><button type="button" class="btn btn-default" ng-click="vm.$close(shipOption.cost)">Select</button></td>
+                <td class="text-right">{{shipOption.cost | currency}}</td>
             </tr>
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="vm.$dismiss()">Close</button>
+        <button type="button" class="btn btn-default" ng-click="vm.$dismiss()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.confirm()">Confirm</button>
     </div>
 </div>

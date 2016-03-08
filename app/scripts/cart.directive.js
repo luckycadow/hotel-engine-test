@@ -40,7 +40,7 @@
         }
 
         function getShipping() {
-            return cartService.shipping;
+            return cartService.getShipping();
         }
 
         function getItems() {
@@ -53,9 +53,12 @@
                 controller: 'ShippingModalController',
                 bindToController: true,
                 controllerAs: 'vm',
-                size: 'md'
-            }).result.then(function(shipping) {
-                cartService.shipping = shipping;
+                size: 'sm',
+                resolve: {
+                    selectedShipOption: cartService.shippingOption
+                }
+            }).result.then(function(shippingOption) {
+                cartService.shippingOption = shippingOption;
             });
         }
     }

@@ -50,7 +50,7 @@
         }
 
         function getShipping() {
-            return cartService.shipping;
+            return cartService.getShipping();
         }
 
         function getItems() {
@@ -63,9 +63,12 @@
                 controller: 'ShippingModalController',
                 bindToController: true,
                 controllerAs: 'vm',
-                size: 'md'
-            }).result.then(function(shipping) {
-                cartService.shipping = shipping;
+                size: 'sm',
+                resolve: {
+                    selectedShipOption: cartService.shippingOption
+                }
+            }).result.then(function(shippingOption) {
+                cartService.shippingOption = shippingOption;
             });
         }
     }
@@ -88,8 +91,9 @@
         self.remove = remove;
         self.getSubtotal = getSubtotal;
         self.getTotal = getTotal;
+        self.getShipping = getShipping;
         self.items = [];
-        self.shipping = 0;
+        self.shippingOption = null;
 
         function add(product, quantity) {
             // Create a new instance with quantity extending the product.  This keeps any modification in
@@ -121,8 +125,12 @@
             }, 0);
         }
 
+        function getShipping() {
+            return self.shippingOption ? self.shippingOption.cost : 0;
+        }
+
         function getTotal() {
-            return getSubtotal() + self.shipping;
+            return getSubtotal() + getShipping();
         }
     }
 
@@ -201,16 +209,23 @@
 (function () {
     'use strict';
 
-    ShippingModalController.$inject = ["shippingOptions"];
+    ShippingModalController.$inject = ["shippingOptions", "selectedShipOption"];
     angular
         .module('HETest')
         .controller('ShippingModalController', ShippingModalController);
 
     /* @ngInject */
-    function ShippingModalController(shippingOptions) {
+    function ShippingModalController(shippingOptions, selectedShipOption) {
+        var vm = this;
 
-        this.shippingOptions = shippingOptions;
+        vm.shippingOptions = shippingOptions;
+        vm.selectedOption = selectedShipOption;
 
+        vm.confirm = confirm;
+
+        function confirm() {
+            vm.$close(vm.selectedOption);
+        }
     }
 
 })();
