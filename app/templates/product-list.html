@@ -22,3 +22,8 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <uib-pagination items-per-page="vm.pageSize" ng-model="vm.pageNumber" total-items="vm.productCount" ng-change="vm.getProducts()"></uib-pagination>
+    </div>
+</div>

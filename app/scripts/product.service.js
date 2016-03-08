@@ -8,6 +8,7 @@
     /* @ngInject */
     function productService(productCollection) {
         this.get = get;
+        this.productCount = productCollection.length;
 
         var defaultOpts = {
             page: 1,
@@ -15,8 +16,10 @@
         };
 
         function get(opts) {
-            opts = angular.extend(opts || {}, defaultOpts);
-            return productCollection.slice((opts.page - 1) * opts.pageSize, opts.pageSize);
+            opts = angular.extend({}, defaultOpts, opts || {});
+            var start = (opts.page - 1) * opts.pageSize;
+            var end = start + opts.pageSize;
+            return productCollection.slice(start, end);
         }
     }
 

@@ -23,10 +23,18 @@
         var vm = this;
 
         vm.addToCart = addToCart;
+        vm.getProducts = getProducts;
+        vm.productCount = productService.productCount;
+        vm.pageNumber = 1;
+        vm.pageSize = 12;
         vm.products = productService.get();
 
         function addToCart(product, quantity) {
             cartService.add(product, quantity);
+        }
+
+        function getProducts() {
+            vm.products = productService.get({ page: vm.pageNumber, pageSize: vm.pageSize });
         }
     }
 
