@@ -4,7 +4,7 @@ const ngAnnotate = require('gulp-ng-annotate');
 const del = require('del');
 const dirs = {
     app: './app/',
-    scripts: ['./app/scripts/app.js', './app/scripts/**/*.js']
+    scripts: ['./app/scripts/app.js', './app/scripts/**/*.js', '!./app/scripts/**/*.spec.js']
 };
 
 gulp.task('clean', (done) => {
