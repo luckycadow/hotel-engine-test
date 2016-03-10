@@ -1,6 +1,10 @@
 ---
 ---
 
+body {
+  margin-bottom: 25px;
+}
+
 .product-card {
 
   .product-name {
@@ -50,6 +54,18 @@
 .cart {
   h3 {
     margin-top: 0;
+  }
+
+  .cart-icon {
+    position: fixed;
+    right: -5px;
+    top: 50px;
+
+    svg {
+      fill: white;
+      width: 35px;
+      height: 35px;
+    }
   }
 }
 
