@@ -30,6 +30,23 @@
   }
 }
 
+.product-search {
+  .reset {
+    position: absolute;
+    top: -2px;
+    right: 2.2rem;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+
+.product-filter {
+  .form-group {
+    margin-bottom: 0;
+  }
+}
+
 .cart {
   h3 {
     margin-top: 0;

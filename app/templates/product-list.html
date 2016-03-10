@@ -1,4 +1,22 @@
 <div class="row">
+    <div class="col-xs-12">
+        <div class="well well-sm">
+            <div class="row">
+                <div class="col-xs-6 product-search">
+                    <input type="search" class="form-control" placeholder="search" ng-model="vm.searchTerm" ng-change="vm.getProducts()" ng-model-options="{ debounce: 250 }">
+                    <span class="text-muted reset" ng-show="vm.searchTerm" ng-click="vm.searchReset()">&times;</span>
+                </div>
+                <div class="col-xs-6 col-sm-5 col-sm-offset-1 text-right form-inline product-filter">
+                    <div class="form-group">
+                        <label class="hidden-xs">Sort by: </label>
+                        <select id="sort-options" class="form-control" ng-options="option as option.name for option in vm.sortOptions" ng-model="vm.selectedSortOption" ng-change="vm.getProducts()"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-4 col-sm-6 col-xs-12" ng-repeat="product in vm.products">
         <div class="panel panel-default product-card">
             <div class="panel-body">

@@ -189,9 +189,13 @@
 
         vm.addToCart = addToCart;
         vm.getProducts = getProducts;
+        vm.searchReset = searchReset;
         vm.productCount = productService.productCount;
         vm.pageNumber = 1;
         vm.pageSize = 12;
+        vm.sortOptions = productService.sortOptions;
+        vm.selectedSortOption = vm.sortOptions[0];
+        vm.searchTerm = '';
         vm.products = productService.get();
 
         function addToCart(product, quantity) {
@@ -199,7 +203,17 @@
         }
 
         function getProducts() {
-            vm.products = productService.get({ page: vm.pageNumber, pageSize: vm.pageSize });
+            vm.products = productService.get({
+                page: vm.pageNumber,
+                pageSize: vm.pageSize,
+                sortOption: vm.selectedSortOption,
+                term: vm.searchTerm
+            });
+        }
+
+        function searchReset() {
+            vm.searchTerm = '';
+            vm.getProducts();
         }
     }
 
@@ -209,27 +223,42 @@
 (function () {
     'use strict';
 
-    productService.$inject = ["productCollection"];
+    productService.$inject = ["productCollection", "$filter"];
     angular
         .module('HETest')
         .service('productService', productService);
 
     /* @ngInject */
-    function productService(productCollection) {
+    function productService(productCollection, $filter) {
         this.get = get;
         this.productCount = productCollection.length;
+        this.sortOptions = [
+            { name: 'Rating', expression: function(item) { return item.customerRating || 0; }, reverse: true },
+            { name: 'Lowest Price', expression: 'price', reverse: false },
+            { name: 'Highest Price', expression: 'price', reverse: true }
+        ];
 
         var defaultOpts = {
             page: 1,
-            pageSize: 12
+            pageSize: 12,
+            sortOption: this.sortOptions[0],
+            term: ''
         };
 
         function get(opts) {
             opts = angular.extend({}, defaultOpts, opts || {});
             var start = (opts.page - 1) * opts.pageSize;
             var end = start + opts.pageSize;
-            return productCollection.slice(start, end);
+            var products = productCollection;
+
+            if (opts.term) {
+                products = $filter('filter')(products, opts.term);
+            }
+
+            var sortedProducts = $filter('orderBy')(products, opts.sortOption.expression, opts.sortOption.reverse);
+            return sortedProducts.slice(start, end);
         }
+
     }
 
 })();
